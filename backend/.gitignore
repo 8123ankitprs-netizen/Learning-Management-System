@@ -1,0 +1,13 @@
+# Backend specific ignores
+
+# Dependencies
+node_modules/
+
+# Secrets
+.env
+.env*.local
+
+# Debug logs
+logs/
+*.log
+npm-debug.log*
