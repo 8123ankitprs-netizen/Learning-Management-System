@@ -1,0 +1,80 @@
+export const dummyCourses = [
+  {
+    id: 1,
+    title: 'Complete React & Node.js Developer Course',
+    category: 'Web Development',
+    instructor: 'John Doe',
+    price: 89.99,
+    rating: 4.8,
+    reviews: 2450,
+    hours: 42,
+    modules: 12,
+    imagePlaceholder: 'bg-primary-100',
+    level: 'Intermediate'
+  },
+  {
+    id: 2,
+    title: 'Data Science Bootcamp: Python & Machine Learning',
+    category: 'Data Science',
+    instructor: 'Jane Smith',
+    price: 99.99,
+    rating: 4.9,
+    reviews: 1840,
+    hours: 55,
+    modules: 15,
+    imagePlaceholder: 'bg-purple-100',
+    level: 'Beginner'
+  },
+  {
+    id: 3,
+    title: 'UI/UX Design Masterclass: From Figma to Webflow',
+    category: 'Design',
+    instructor: 'Sarah Johnson',
+    price: 79.99,
+    rating: 4.7,
+    reviews: 930,
+    hours: 24,
+    modules: 8,
+    imagePlaceholder: 'bg-pink-100',
+    level: 'Beginner'
+  },
+  {
+    id: 4,
+    title: 'Advanced CSS and Sass: Flexbox, Grid, Animations',
+    category: 'Web Development',
+    instructor: 'Michael Brown',
+    price: 49.99,
+    rating: 4.9,
+    reviews: 3200,
+    hours: 28,
+    modules: 10,
+    imagePlaceholder: 'bg-blue-200',
+    level: 'Advanced'
+  },
+  {
+    id: 5,
+    title: 'Digital Marketing Mastery 2024',
+    category: 'Marketing',
+    instructor: 'Emily Davis',
+    price: 59.99,
+    rating: 4.6,
+    reviews: 1100,
+    hours: 18,
+    modules: 6,
+    imagePlaceholder: 'bg-green-100',
+    level: 'Beginner'
+  },
+  {
+    id: 6,
+    title: 'Full Stack Java Developer Bootcamp',
+    category: 'Web Development',
+    instructor: 'David Wilson',
+    price: 119.99,
+    rating: 4.5,
+    reviews: 800,
+    hours: 60,
+    modules: 18,
+    imagePlaceholder: 'bg-orange-100',
+    level: 'Intermediate'
+  }
+];

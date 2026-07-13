@@ -1,0 +1,476 @@
+
+> frontend@0.0.0 lint
+> oxlint
+
+
+  ! eslint(no-unused-vars): Identifier 'BookOpen' is imported but never used.
+   ,-[src/components/layout/Footer.jsx:2:10]
+ 1 | import React from 'react';
+ 2 | import { BookOpen, Globe, Mail, Info } from 'lucide-react';
+   :          ^^^^|^^^
+   :              `-- 'BookOpen' is imported here
+ 3 | import { Link } from 'react-router-dom';
+   `----
+  help: Consider removing this import.
+
+  x Expected corresponding JSX closing tag for 'form'.
+      ,-[src/pages/Notes.jsx:1279:13]
+ 1148 |             <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-205 dark:border-slate-805/70 shadow-md">
+ 1149 |               <form onSubmit={handleAddNote} className="space-y-4">
+      :                ^^|^
+      :                  `-- Opened here
+ 1150 |                 <div>
+ 1151 |                   <label className="block text-xs font-semibold text-gray-700 dark:text-slate-355 uppercase mb-1.5">Note Title</label>
+ 1152 |                   <input 
+ 1153 |                     type="text" 
+ 1154 |                     required
+ 1155 |                     value={noteTitle}
+ 1156 |                     onChange={(e) => setNoteTitle(e.target.value)}
+ 1157 |                     placeholder="e.g., Hooks optimization logic"
+ 1158 |                     className="block w-full px-4 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-955 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all text-sm font-semibold shadow-sm"
+ 1159 |                   />
+ 1160 |                 </div>
+ 1161 | 
+ 1162 |                 <div>
+ 1163 |                   <label className="block text-xs font-semibold text-gray-700 dark:text-slate-355 uppercase mb-1.5">Category Topic</label>
+ 1164 |                   <select 
+ 1165 |                     value={noteCategory}
+ 1166 |                     onChange={(e) => setNoteCategory(e.target.value)}
+ 1167 |                     className="block w-full px-4 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-955 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all text-sm font-semibold shadow-sm"
+ 1168 |                   >
+ 1169 |                     {categories.map((cat) => (
+ 1170 |                       <option key={cat} value={cat}>{cat}</option>
+ 1171 |                     ))}
+ 1172 |                   </select>
+ 1173 |                 </div>
+ 1174 | 
+ 1175 |                 <div>
+ 1176 |                   <label className="block text-xs font-semibold text-gray-700 dark:text-slate-355 uppercase mb-1.5">Note Content</label>
+ 1177 |                   <textarea 
+ 1178 |                     required
+ 1179 |                     rows={4}
+ 1180 |                     value={noteContent}
+ 1181 |                     onChange={(e) => setNoteContent(e.target.value)}
+ 1182 |                     placeholder="Type your lecture summary or revision keys here..."
+ 1183 |                     className="block w-full px-4 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-955 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all text-sm font-semibold shadow-sm resize-none"
+ 1184 |                   ></textarea>
+ 1185 |                 </div>
+ 1186 | 
+ 1187 |                 <button 
+ 1188 |                   type="submit"
+ 1189 |                   className="w-full py-2.5 bg-gradient-to-r from-primary-600 to-blue-600 hover:from-primary-500 hover:to-blue-500 text-white rounded-xl text-xs font-extrabold uppercase tracking-wide flex items-center justify-center gap-1.5 cursor-pointer shadow-md hover:scale-101 active:scale-95 transition-all"
+ 1190 |                 >
+ 1191 |                   <Plus className="h-4 w-4" /> Save Note to List
+ 1192 |                 </button>
+ 1193 |                       {/* Saved notepad entries display list */}
+ 1194 |             <div className="space-y-4">
+ 1195 |               <h3 className="text-sm font-extrabold text-slate-800 dark:text-slate-355 uppercase tracking-widest mt-6">My Saved Notepad Entries</h3>
+ 1196 |               
+ 1197 |               {/* Category Filter Tabs */}
+ 1198 |               {customNotes.length > 0 && (
+ 1199 |                 <div className="flex flex-wrap gap-1.5 pb-2.5 border-b border-slate-100 dark:border-slate-805/45">
+ 1200 |                   {['All', ...categories].map((cat) => {
+ 1201 |                     const count = cat === 'All'
+ 1202 |                       ? customNotes.length
+ 1203 |                       : customNotes.filter(n => n.category === cat).length;
+ 1204 |                     
+ 1205 |                     if (count === 0 && cat !== 'All') return null;
+ 1206 | 
+ 1207 |                     return (
+ 1208 |                       <button
+ 1209 |                         key={cat}
+ 1210 |                         type="button"
+ 1211 |                         onClick={() => setActiveNotepadTab(cat)}
+ 1212 |                         className={`px-2.5 py-1 rounded-xl text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer border ${
+ 1213 |                           activeNotepadTab === cat
+ 1214 |                             ? 'bg-[#f26e56]/15 text-[#f26e56] border-[#f26e56]/30'
+ 1215 |                             : 'bg-white dark:bg-slate-900 text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-800 hover:text-slate-655'
+ 1216 |                         }`}
+ 1217 |                       >
+ 1218 |                         {cat} ({count})
+ 1219 |                       </button>
+ 1220 |                     );
+ 1221 |                   })}
+ 1222 |                 </div>
+ 1223 |               )}
+ 1224 | 
+ 1225 |               {filteredCustomNotes.length === 0 ? (
+ 1226 |                 <div className="text-center py-10 bg-white dark:bg-slate-900 border border-slate-205 dark:border-slate-805/70 rounded-3xl shadow-sm text-slate-455 dark:text-slate-500 text-xs font-semibold">
+ 1227 |                   {customNotes.length === 0 
+ 1228 |                     ? 'No notes saved yet. Write something in the pad above!' 
+ 1229 |                     : `No notes saved under "${activeNotepadTab}" category.`}
+ 1230 |                 </div>
+ 1231 |               ) : (
+ 1232 |                 <div className="space-y-4 max-h-[420px] overflow-y-auto pr-2">
+ 1233 |                   {filteredCustomNotes.map((note) => (
+ 1234 |                     <div key={note.id} className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-805/70 shadow-sm relative group/saved">
+ 1235 |                       <div className="flex justify-between items-start gap-4 mb-2">
+ 1236 |                         <div>
+ 1237 |                           <span className="text-[9px] uppercase tracking-wider font-extrabold text-[#f26e56] bg-[#f26e56]/5 border border-[#f26e56]/15 px-2 py-0.5 rounded-full">
+ 1238 |                             {note.category}
+ 1239 |                           </span>
+ 1240 |                           <h4 className="font-extrabold text-slate-900 dark:text-white text-sm mt-1.5 leading-snug">
+ 1241 |                             {note.title}
+ 1242 |                           </h4>
+ 1243 |                           <span className="text-[9px] text-slate-400 font-bold block mt-0.5">{note.date}</span>
+ 1244 |                         </div>
+ 1245 |                         <button 
+ 1246 |                           onClick={() => handleDeleteNote(note.id)}
+ 1247 |                           className="p-1.5 hover:bg-red-50 dark:hover:bg-red-950/20 text-slate-400 hover:text-red-500 rounded-lg transition-colors cursor-pointer"
+ 1248 |                           title="Delete Note"
+ 1249 |                         >
+ 1250 |                           <Trash2 className="h-3.5 w-3.5" />
+ 1251 |                         </button>
+ 1252 |                       </div>
+ 1253 |                       
+ 1254 |                       <p className="text-xs text-slate-600 dark:text-slate-400 mb-4 leading-relaxed font-semibold line-clamp-3 whitespace-pre-wrap">
+ 1255 |                         {note.content}
+ 1256 |                       </p>
+ 1257 | 
+ 1258 |                       {/* Download Actions */}
+ 1259 |                       <div className="flex justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-805/65">
+ 1260 |                         <button 
+ 1261 |                           onClick={() => handleDownloadTXT(note)}
+ 1262 |                           className="px-2.5 py-1.5 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-colors border border-slate-100 dark:border-slate-800"
+ 1263 |                         >
+ 1264 |                           <FileDown className="h-3.5 w-3.5" /> TXT
+ 1265 |                         </button>
+ 1266 |                         <button 
+ 1267 |                           onClick={() => handlePrintCustomNote(note)}
+ 1268 |                           className="px-2.5 py-1.5 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 text-[#f26e56] rounded-lg text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-colors border border-slate-100 dark:border-slate-800"
+ 1269 |                         >
+ 1270 |                           <Printer className="h-3.5 w-3.5" /> Print/PDF
+ 1271 |                         </button>
+ 1272 |                       </div>
+ 1273 |                     </div>
+ 1274 |                   ))}
+ 1275 |                 </div>
+ 1276 |               )}
+ 1277 |             </div>
+ 1278 | 
+ 1279 |           </div>
+      :             ^|^
+      :              `-- Expected `</form>`
+ 1280 | 
+      `----
+
+  x Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+      ,-[src/pages/Notes.jsx:1286:1]
+ 1285 |   );
+ 1286 | };
+      : ^
+ 1287 | 
+      `----
+
+  ! react(only-export-components): Fast refresh only works when a file only exports components. Move your React context(s) to a separate file.
+   ,-[src/context/ThemeContext.jsx:3:14]
+ 2 | 
+ 3 | export const ThemeContext = createContext();
+   :              ^^^^^^^^^^^^
+ 4 | 
+   `----
+
+  ! react(only-export-components): Fast refresh only works when a file only exports components. Move your React context(s) to a separate file.
+   ,-[src/context/AuthContext.jsx:4:14]
+ 3 | // 1. Create the Context
+ 4 | export const AuthContext = createContext();
+   :              ^^^^^^^^^^^
+ 5 | 
+   `----
+
+  ! eslint(no-unused-vars): Identifier 'Clock' is imported but never used.
+   ,-[src/pages/Dashboard.jsx:2:20]
+ 1 | import React, { useContext, useEffect } from 'react';
+ 2 | import { BookOpen, Clock, PlayCircle, Award, Edit } from 'lucide-react';
+   :                    ^^|^^
+   :                      `-- 'Clock' is imported here
+ 3 | import { Link, useNavigate } from 'react-router-dom';
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Parameter 'enrollment' is declared but never used. Unused parameters should start with a '_'.
+    ,-[src/pages/Dashboard.jsx:29:43]
+ 28 | 
+ 29 |   const handlePrintCertificate = (course, enrollment) => {
+    :                                           ^^^^^|^^^^
+    :                                                `-- 'enrollment' is declared here
+ 30 |     const printWindow = window.open('', '_blank', 'width=1000,height=700');
+    `----
+  help: Consider removing this parameter.
+
+  ! eslint(no-unused-vars): Catch parameter 'err' is caught but never used.
+     ,-[src/pages/Dashboard.jsx:182:16]
+ 181 |         await cancelMutation.mutateAsync(enrollmentId);
+ 182 |       } catch (err) {
+     :                ^|^
+     :                 `-- 'err' is declared here
+ 183 |         alert('Failed to cancel enrollment. Please try again.');
+     `----
+  help: Consider handling this error.
+
+  ! eslint(no-unused-vars): Identifier 'BookOpen' is imported but never used.
+   ,-[src/pages/Tutorials.jsx:3:24]
+ 2 | import { useSearchParams } from 'react-router-dom';
+ 3 | import { Search, Play, BookOpen, Clock, Tag, Sparkles, HelpCircle, Layers, MonitorPlay } from 'lucide-react';
+   :                        ^^^^|^^^
+   :                            `-- 'BookOpen' is imported here
+ 4 | 
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'HelpCircle' is imported but never used.
+   ,-[src/pages/Tutorials.jsx:3:56]
+ 2 | import { useSearchParams } from 'react-router-dom';
+ 3 | import { Search, Play, BookOpen, Clock, Tag, Sparkles, HelpCircle, Layers, MonitorPlay } from 'lucide-react';
+   :                                                        ^^^^^|^^^^
+   :                                                             `-- 'HelpCircle' is imported here
+ 4 | 
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Layers' is imported but never used.
+   ,-[src/pages/Tutorials.jsx:3:68]
+ 2 | import { useSearchParams } from 'react-router-dom';
+ 3 | import { Search, Play, BookOpen, Clock, Tag, Sparkles, HelpCircle, Layers, MonitorPlay } from 'lucide-react';
+   :                                                                    ^^^|^^
+   :                                                                       `-- 'Layers' is imported here
+ 4 | 
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Filter' is imported but never used.
+    ,-[src/pages/AdminDashboard.jsx:12:3]
+ 11 |   Search, 
+ 12 |   Filter, 
+    :   ^^^|^^
+    :      `-- 'Filter' is imported here
+ 13 |   Activity, 
+    `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Download' is imported but never used.
+    ,-[src/pages/AdminDashboard.jsx:15:3]
+ 14 |   Database,
+ 15 |   Download
+    :   ^^^^|^^^
+    :       `-- 'Download' is imported here
+ 16 | } from 'lucide-react';
+    `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'ArrowRight' is imported but never used.
+   ,-[src/pages/Blog.jsx:2:17]
+ 1 | import React, { useState } from 'react';
+ 2 | import { Clock, ArrowRight, User, Search, Sparkles, Heart, Share2, X, Eye, ThumbsUp, Calendar } from 'lucide-react';
+   :                 ^^^^^|^^^^
+   :                      `-- 'ArrowRight' is imported here
+ 3 | 
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Eye' is imported but never used.
+   ,-[src/pages/Blog.jsx:2:71]
+ 1 | import React, { useState } from 'react';
+ 2 | import { Clock, ArrowRight, User, Search, Sparkles, Heart, Share2, X, Eye, ThumbsUp, Calendar } from 'lucide-react';
+   :                                                                       ^|^
+   :                                                                        `-- 'Eye' is imported here
+ 3 | 
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'ThumbsUp' is imported but never used.
+   ,-[src/pages/Blog.jsx:2:76]
+ 1 | import React, { useState } from 'react';
+ 2 | import { Clock, ArrowRight, User, Search, Sparkles, Heart, Share2, X, Eye, ThumbsUp, Calendar } from 'lucide-react';
+   :                                                                            ^^^^|^^^
+   :                                                                                `-- 'ThumbsUp' is imported here
+ 3 | 
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'CheckCircle2' is imported but never used.
+    ,-[src/pages/CourseDetails.jsx:15:3]
+ 14 |   ShieldCheck,
+ 15 |   CheckCircle2,
+    :   ^^^^^^|^^^^^
+    :         `-- 'CheckCircle2' is imported here
+ 16 |   AlertCircle
+    `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Catch parameter 'err' is caught but never used.
+    ,-[src/pages/CourseDetails.jsx:59:16]
+ 58 |         await cancelMutation.mutateAsync(enrollmentId);
+ 59 |       } catch (err) {
+    :                ^|^
+    :                 `-- 'err' is declared here
+ 60 |         alert('Failed to cancel enrollment. Please try again.');
+    `----
+  help: Consider handling this error.
+
+  ! eslint(no-unused-vars): Identifier 'Edit' is imported but never used.
+   ,-[src/components/layout/Navbar.jsx:3:48]
+ 2 | import { Link, useNavigate } from 'react-router-dom';
+ 3 | import { Search, Menu, Moon, Sun, ChevronDown, Edit } from 'lucide-react';
+   :                                                ^^|^
+   :                                                  `-- 'Edit' is imported here
+ 4 | import { AuthContext } from '../../context/AuthContext';
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Variable 'instructor' is declared but never used. Unused variables should start with a '_'.
+   ,-[src/components/common/CourseCard.jsx:8:50]
+ 7 | const CourseCard = ({ course }) => {
+ 8 |   const { id, _id, title, description, category, instructor, price, hours, modules, imagePlaceholder, thumbnailUrl } = course;
+   :                                                  ^^^^^|^^^^
+   :                                                       `-- 'instructor' is declared here
+ 9 |   const courseId = _id || id;
+   `----
+  help: Consider removing this declaration.
+
+  ! eslint(no-unused-vars): Identifier 'BookOpen' is imported but never used.
+    ,-[src/pages/Courses.jsx:14:3]
+ 13 |   Sparkles,
+ 14 |   BookOpen,
+    :   ^^^^|^^^
+    :       `-- 'BookOpen' is imported here
+ 15 |   Award,
+    `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Award' is imported but never used.
+    ,-[src/pages/Courses.jsx:15:3]
+ 14 |   BookOpen,
+ 15 |   Award,
+    :   ^^|^^
+    :     `-- 'Award' is imported here
+ 16 |   Globe
+    `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Variable 'searchParams' is declared but never used. Unused variables should start with a '_'.
+    ,-[src/pages/Courses.jsx:22:10]
+ 21 | const Courses = () => {
+ 22 |   const [searchParams, setSearchParams] = useState(new URLSearchParams(window.location.search));
+    :          ^^^^^^|^^^^^
+    :                `-- 'searchParams' is declared here
+ 23 |   const [activeSearchParams, setActiveSearchParams] = useSearchParams();
+    `----
+  help: Consider removing this declaration.
+
+  ! eslint(no-unused-vars): Variable 'setSearchParams' is declared but never used. Unused variables should start with a '_'.
+    ,-[src/pages/Courses.jsx:22:24]
+ 21 | const Courses = () => {
+ 22 |   const [searchParams, setSearchParams] = useState(new URLSearchParams(window.location.search));
+    :                        ^^^^^^^|^^^^^^^
+    :                               `-- 'setSearchParams' is declared here
+ 23 |   const [activeSearchParams, setActiveSearchParams] = useSearchParams();
+    `----
+  help: Consider removing this declaration.
+
+  ! eslint(no-unused-vars): Identifier 'User' is imported but never used.
+   ,-[src/pages/Profile.jsx:4:3]
+ 3 | import { 
+ 4 |   User, 
+   :   ^^|^
+   :     `-- 'User' is imported here
+ 5 |   Mail, 
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Shield' is imported but never used.
+   ,-[src/pages/Profile.jsx:6:3]
+ 5 |   Mail, 
+ 6 |   Shield, 
+   :   ^^^|^^
+   :      `-- 'Shield' is imported here
+ 7 |   CheckCircle2, 
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'BookOpen' is imported but never used.
+    ,-[src/pages/Profile.jsx:10:3]
+  9 |   Edit, 
+ 10 |   BookOpen, 
+    :   ^^^^|^^^
+    :       `-- 'BookOpen' is imported here
+ 11 |   Calendar, 
+    `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Heart' is imported but never used.
+    ,-[src/pages/Profile.jsx:18:3]
+ 17 |   Activity,
+ 18 |   Heart
+    :   ^^|^^
+    :     `-- 'Heart' is imported here
+ 19 | } from 'lucide-react';
+    `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Catch parameter 'err' is caught but never used.
+     ,-[src/pages/Profile.jsx:153:16]
+ 152 |         setTimeout(() => setSuccessMessage(''), 5000);
+ 153 |       } catch (err) {
+     :                ^|^
+     :                 `-- 'err' is declared here
+ 154 |         setErrorMessage('Failed to remove photo. Please try again.');
+     `----
+  help: Consider handling this error.
+
+  ! eslint(no-unused-vars): Identifier 'ArrowDownRight' is imported but never used.
+    ,-[src/pages/Home.jsx:9:3]
+  8 |   Palette, 
+  9 |   ArrowDownRight, 
+    :   ^^^^^^^|^^^^^^
+    :          `-- 'ArrowDownRight' is imported here
+ 10 |   ArrowUpRight, 
+    `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'ArrowUpRight' is imported but never used.
+    ,-[src/pages/Home.jsx:10:3]
+  9 |   ArrowDownRight, 
+ 10 |   ArrowUpRight, 
+    :   ^^^^^^|^^^^^
+    :         `-- 'ArrowUpRight' is imported here
+ 11 |   ChevronRight, 
+    `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'CheckCircle' is imported but never used.
+    ,-[src/pages/Home.jsx:17:3]
+ 16 |   Search,
+ 17 |   CheckCircle,
+    :   ^^^^^|^^^^^
+    :        `-- 'CheckCircle' is imported here
+ 18 |   HelpCircle,
+    `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Variable 'activeCategory' is declared but never used. Unused variables should start with a '_'.
+     ,-[src/pages/Home.jsx:231:9]
+ 230 | 
+ 231 |   const activeCategory = categories.find(c => c._id === activeCategoryId);
+     :         ^^^^^^^|^^^^^^
+     :                `-- 'activeCategory' is declared here
+ 232 |   const filteredCourses = courses.filter((course) => {
+     `----
+  help: Consider removing this declaration.
+
+  ! react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'slides.length'
+     ,-[src/pages/Home.jsx:171:6]
+ 167 |     const timer = setInterval(() => {
+ 168 |       setCurrentSlide((prev) => (prev + 1) % slides.length);
+     :                                              ^^^|^^
+     :                                                 `-- useEffect uses `slides.length` here
+ 169 |     }, 6000);
+ 170 |     return () => clearInterval(timer);
+ 171 |   }, []);
+     :      ^^
+ 172 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+Found 32 warnings and 2 errors.
+Finished in 13ms on 27 files with 91 rules using 12 threads.
