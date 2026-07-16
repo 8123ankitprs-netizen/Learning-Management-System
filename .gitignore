@@ -44,3 +44,6 @@ Thumbs.db
 # Diagnostic and testing logs
 lint_output.txt
 **/lint_output.txt
+
+.vercel
+.env*
