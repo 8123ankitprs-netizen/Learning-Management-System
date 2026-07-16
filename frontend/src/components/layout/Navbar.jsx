@@ -95,7 +95,7 @@ const Navbar = () => {
                     </Link>
                   )}
                   <Link to="/dashboard" className="text-gray-655 dark:text-slate-350 hover:text-primary-605 dark:hover:text-white font-medium text-xs md:text-sm transition-colors">
-                    My Learning
+                    My Learning Dashboard
                   </Link>
                 </div>
                 <div className="flex items-center gap-2 md:gap-3 border-l border-gray-200 dark:border-slate-800 pl-2.5 md:pl-4">
