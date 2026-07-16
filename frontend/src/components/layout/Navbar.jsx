@@ -27,7 +27,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white dark:bg-[#0f1219] text-gray-900 dark:text-white border-b border-gray-100 dark:border-slate-800/80 sticky top-0 z-50 transition-colors duration-200">
+    <nav className="bg-white dark:bg-[#0f1219] text-gray-900 dark:text-white border-b border-gray-100 dark:border-slate-800/80 fixed top-0 left-0 right-0 z-50 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Header Row */}
