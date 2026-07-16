@@ -76,29 +76,29 @@ const Navbar = () => {
           </div>
 
           {/* User Profile / Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="flex items-center space-x-2.5 md:space-x-4">
             {/* Theme Toggle */}
             <button 
               onClick={toggleTheme} 
-              className="p-2 border border-gray-200 dark:border-slate-800 hover:bg-gray-100 dark:hover:bg-slate-900 rounded-lg text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white cursor-pointer transition-colors"
+              className="p-1.5 md:p-2 border border-gray-200 dark:border-slate-800 hover:bg-gray-100 dark:hover:bg-slate-900 rounded-lg text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white cursor-pointer transition-colors"
               title="Toggle Theme"
             >
-              {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+              {theme === 'light' ? <Moon className="h-4.5 w-4.5 md:h-4 md:w-4" /> : <Sun className="h-4.5 w-4.5 md:h-4 md:w-4" />}
             </button>
 
             {user ? (
               <>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2.5 md:gap-4">
                   {user.role === 'admin' && (
-                    <Link to="/admin" className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-bold text-sm transition-colors">
-                      Admin Panel
+                    <Link to="/admin" className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-bold text-xs md:text-sm transition-colors">
+                      Admin
                     </Link>
                   )}
-                  <Link to="/dashboard" className="text-gray-600 dark:text-slate-350 hover:text-primary-605 dark:hover:text-white font-medium text-sm transition-colors">
+                  <Link to="/dashboard" className="text-gray-655 dark:text-slate-350 hover:text-primary-605 dark:hover:text-white font-medium text-xs md:text-sm transition-colors">
                     My Learning
                   </Link>
                 </div>
-                <div className="flex items-center gap-3 border-l border-gray-200 dark:border-slate-800 pl-4">
+                <div className="flex items-center gap-2 md:gap-3 border-l border-gray-200 dark:border-slate-800 pl-2.5 md:pl-4">
                   {/* User Name */}
                   <span className="hidden sm:inline text-xs font-semibold text-gray-700 dark:text-slate-300">
                     {user.name}
@@ -109,7 +109,7 @@ const Navbar = () => {
                     <img 
                       src={user.profileImage && user.profileImage !== 'default.jpg' ? user.profileImage : `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(user.name)}&backgroundColor=0284c7`} 
                       alt={user.name} 
-                      className="h-8 w-8 rounded-full border border-gray-250 dark:border-slate-700 object-cover"
+                      className="h-7 w-7 md:h-8 md:w-8 rounded-full border border-gray-250 dark:border-slate-700 object-cover"
                     />
                   </Link>
                   <button onClick={logout} className="text-xs font-medium text-gray-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-pointer">
@@ -119,30 +119,19 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Link to="/login" className="text-gray-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-white font-medium text-sm transition-colors">
+                <Link to="/login" className="text-gray-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-white font-medium text-xs md:text-sm transition-colors">
                   Log in
                 </Link>
-                <Link to="/register" className="bg-primary-600 hover:bg-primary-500 text-white px-4 py-2 rounded-lg font-medium text-sm transition-colors shadow-sm">
+                <Link to="/register" className="bg-primary-600 hover:bg-primary-500 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-medium text-xs md:text-sm transition-colors shadow-sm">
                   Sign up
                 </Link>
               </>
             )}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="flex md:hidden items-center gap-2">
-            <button 
-              onClick={toggleTheme} 
-              className="p-1.5 rounded-lg text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-900 cursor-pointer transition-colors"
-            >
-              {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
-            </button>
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white focus:outline-none p-1.5 cursor-pointer"
-            >
-              <Menu className="h-6 w-6" />
-            </button>
+          {/* Mobile menu button (Hidden - no longer needed since actions are exposed) */}
+          <div className="hidden">
+            <button className="hidden"></button>
           </div>
 
         </div>
