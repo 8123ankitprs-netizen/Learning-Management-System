@@ -11,9 +11,11 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [showLearningDropdown, setShowLearningDropdown] = useState(false);
   const [showTutorialsDropdown, setShowTutorialsDropdown] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const triggerSearch = () => {
     if (searchQuery.trim()) {
+      setIsMobileMenuOpen(false);
       navigate(`/courses?search=${encodeURIComponent(searchQuery)}`);
     }
   };
@@ -135,7 +137,10 @@ const Navbar = () => {
             >
               {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
             </button>
-            <button className="text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white focus:outline-none p-1.5">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white focus:outline-none p-1.5 cursor-pointer"
+            >
               <Menu className="h-6 w-6" />
             </button>
           </div>
@@ -184,6 +189,62 @@ const Navbar = () => {
         </div>
 
       </div>
+      {isMobileMenuOpen && (
+        <div className="md:hidden border-t border-gray-150 dark:border-slate-800/80 bg-white dark:bg-[#0f1219] px-4 pt-2 pb-4 space-y-3">
+          {/* Mobile Search */}
+          <div className="relative w-full">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
+              className="block w-full pl-3 pr-10 py-1.5 border border-gray-250 dark:border-slate-700 rounded-lg bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-white sm:text-sm"
+              placeholder="Search..."
+            />
+            <button onClick={triggerSearch} className="absolute inset-y-0 right-0 pr-3 flex items-center">
+              <Search className="h-4 w-4" />
+            </button>
+          </div>
+          {/* Mobile Links */}
+          <div className="flex flex-col space-y-2">
+            <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 dark:text-slate-200 py-1 font-semibold text-sm">Home</Link>
+            <Link to="/courses" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 dark:text-slate-200 py-1 font-semibold text-sm">Courses</Link>
+            <Link to="/tutorials" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 dark:text-slate-200 py-1 font-semibold text-sm">Tutorials</Link>
+            <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 dark:text-slate-200 py-1 font-semibold text-sm">Blog</Link>
+            <Link to="/notes" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 dark:text-slate-200 py-1 font-semibold text-sm">Notes</Link>
+            <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 dark:text-slate-200 py-1 font-semibold text-sm">Contact</Link>
+          </div>
+          {/* Mobile Auth/Profile Actions */}
+          <div className="pt-2 border-t border-gray-150 dark:border-slate-800 flex flex-col gap-2">
+            {user ? (
+              <>
+                <div className="flex items-center gap-3">
+                  <img 
+                    src={user.profileImage && user.profileImage !== 'default.jpg' ? user.profileImage : `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(user.name)}&backgroundColor=0284c7`} 
+                    alt={user.name} 
+                    className="h-8 w-8 rounded-full border border-gray-200 object-cover"
+                  />
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-gray-905 dark:text-white">{user.name}</span>
+                    <span className="text-[10px] text-gray-500">{user.email}</span>
+                  </div>
+                </div>
+                {user.role === 'admin' && (
+                  <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="text-purple-600 font-bold text-xs py-1">Admin Panel</Link>
+                )}
+                <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-655 dark:text-slate-350 font-bold text-xs py-1">My Learning</Link>
+                <Link to="/profile" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-655 dark:text-slate-350 font-bold text-xs py-1">Profile Settings</Link>
+                <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="text-left text-xs font-bold text-red-500 py-1 cursor-pointer">Logout</button>
+              </>
+            ) : (
+              <div className="flex gap-4">
+                <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="flex-1 text-center py-2 border border-gray-250 rounded-lg text-sm font-semibold text-gray-700 dark:text-white">Log in</Link>
+                <Link to="/register" onClick={() => setIsMobileMenuOpen(false)} className="flex-1 text-center py-2 bg-primary-600 text-white rounded-lg text-sm font-semibold">Sign up</Link>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
