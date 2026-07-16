@@ -148,7 +148,17 @@ const Navbar = () => {
         </div>
 
         {/* Sub-Navigation Row */}
-        <div className="flex items-center space-x-6 py-2 border-t border-gray-100 dark:border-slate-800/40 text-xs font-semibold text-gray-500 dark:text-slate-400">
+        <div className="flex items-center space-x-6 py-2 border-t border-gray-100 dark:border-slate-800/40 text-xs font-semibold text-gray-500 dark:text-slate-400 overflow-x-auto scrollbar-none whitespace-nowrap">
+          {/* Main Links (Visible on Mobile/Tablet only here) */}
+          <Link to="/" className="lg:hidden hover:text-[#f26e56] dark:hover:text-[#f26e56] text-gray-600 dark:text-slate-200 font-bold transition-colors">Home</Link>
+          <Link to="/courses" className="lg:hidden hover:text-[#f26e56] dark:hover:text-[#f26e56] text-gray-600 dark:text-slate-200 font-bold transition-colors">Courses</Link>
+          <Link to="/tutorials" className="lg:hidden hover:text-[#f26e56] dark:hover:text-[#f26e56] text-gray-600 dark:text-slate-200 font-bold transition-colors">Tutorials</Link>
+          <Link to="/blog" className="lg:hidden hover:text-[#f26e56] dark:hover:text-[#f26e56] text-gray-600 dark:text-slate-200 font-bold transition-colors">Blog</Link>
+          <Link to="/notes" className="lg:hidden hover:text-[#f26e56] dark:hover:text-[#f26e56] text-gray-600 dark:text-slate-200 font-bold transition-colors">Notes</Link>
+          <Link to="/contact" className="lg:hidden hover:text-[#f26e56] dark:hover:text-[#f26e56] text-gray-600 dark:text-slate-200 font-bold transition-colors">Contact</Link>
+          
+          <div className="h-4 w-[1px] bg-gray-200 dark:bg-slate-800 lg:hidden flex-shrink-0"></div>
+
           <div className="relative">
             <button 
               onClick={() => {
@@ -204,15 +214,6 @@ const Navbar = () => {
             <button onClick={triggerSearch} className="absolute inset-y-0 right-0 pr-3 flex items-center">
               <Search className="h-4 w-4" />
             </button>
-          </div>
-          {/* Mobile Links */}
-          <div className="flex flex-col space-y-2">
-            <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 dark:text-slate-200 py-1 font-semibold text-sm">Home</Link>
-            <Link to="/courses" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 dark:text-slate-200 py-1 font-semibold text-sm">Courses</Link>
-            <Link to="/tutorials" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 dark:text-slate-200 py-1 font-semibold text-sm">Tutorials</Link>
-            <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 dark:text-slate-200 py-1 font-semibold text-sm">Blog</Link>
-            <Link to="/notes" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 dark:text-slate-200 py-1 font-semibold text-sm">Notes</Link>
-            <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 dark:text-slate-200 py-1 font-semibold text-sm">Contact</Link>
           </div>
           {/* Mobile Auth/Profile Actions */}
           <div className="pt-2 border-t border-gray-150 dark:border-slate-800 flex flex-col gap-2">
